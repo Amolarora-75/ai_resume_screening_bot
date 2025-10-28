@@ -1,0 +1,35 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --card:#111827;
+  --panel:#0b1220;
+}
+
+input, textarea {
+  @apply bg-neutral-800 text-neutral-100 rounded-lg outline-none focus:ring-2 ring-indigo-500;
+}
+.button {
+  @apply px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 transition;
+}
+.card {
+  @apply bg-neutral-800 rounded-2xl shadow-lg border border-neutral-700;
+}
+.tab {
+  @apply px-4 py-2 rounded-lg cursor-pointer;
+}
+.tab-active {
+  @apply bg-neutral-800 border border-neutral-600;
+}
+.upload-box {
+  @apply border-2 border-dashed border-neutral-600 rounded-2xl p-6 flex flex-col items-center justify-center gap-2 bg-neutral-800;
+}
+.table th, .table td { @apply px-3 py-2 text-sm; }
+.modal {
+  @apply fixed inset-0 bg-black/60 flex items-center justify-center p-4;
+}
+.modal-card {
+  @apply bg-neutral-900 w-full max-w-3xl rounded-2xl p-6 border border-neutral-700;
+}
