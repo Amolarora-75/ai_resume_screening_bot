@@ -103,6 +103,8 @@ python -m venv .venv
 pip install -r requirements.txt
 # Run FastAPI server
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
 Visit http://localhost:8000/docs to test APIs.
 
 Frontend Setup
