@@ -1,99 +1,206 @@
+#  AI-Based Resume Screening Bot
 
-# AI Resume Screening Bot
-
-A full‑stack app that parses resumes (PDF), extracts structured data, rates the resume, and suggests improvements/upskilling with Gemini (via LangChain). 
-UI matches the provided screenshots: dark theme, 2 tabs — **Upload** (live) and **History** (past uploads with Details modal).
-
-## Features
-- FastAPI backend
-- Postgres via SQLAlchemy (with **SQLite fallback** for quick run)
-- PDF text extraction (pdfminer.six)
-- Basic entity extraction (name, emails, phones, skills, education, experience, projects, links)
-- LLM analysis with Gemini (optional: set `GEMINI_API_KEY`) — graceful fallback to rule‑based suggestions
-- React + Vite + Tailwind frontend (dark, minimal UI)
-- History table + Details modal
-- `sample_data/` with example PDFs placeholder
-- Docker Compose for one‑command Postgres + backend
-- CORS enabled for local dev
-
-## Quick Start
-
-### Option A — Quick Run (SQLite only)
-Best for testing without installing Postgres.
-
-```bash
-# 1) Backend
-cd backend
-python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# macOS/Linux
-source .venv/bin/activate
-
-pip install -r requirements.txt
-
-# (Optional) enable Gemini LLM:
-# set GEMINI_API_KEY=<your key>
-
-# Start API (SQLite auto-creates ./app.db)
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-```bash
-# 2) Frontend
-cd ../frontend
-npm install
-npm run dev
-```
-
-Open the app at http://localhost:5173 (frontend). It will call the API at http://localhost:8000.
-
-### Option B — Postgres (recommended for assignment)
-Using Docker Compose (you only need Docker installed).
-
-```bash
-# Start Postgres and pgAdmin (optional) + backend API container
-docker compose up --build
-```
-
-The backend API will be at http://localhost:8000 and Postgres at localhost:5432 (user: `resume`, pass: `resume`, db: `resume_db`).
-
-### Option C — Manual Postgres (without Docker)
-Create a Postgres DB and set environment variables in `backend/.env`:
-
-```
-DATABASE_URL=postgresql+psycopg2://<user>:<password>@<host>:5432/<db>
-GEMINI_API_KEY=...         # optional
-```
-
-Then run the backend as in Option A (but with Postgres packages installed).
-
-## Running End‑to‑End
-1. Start the backend (Option A or B).
-2. Start the frontend.
-3. In the **Upload** tab, paste a job description and upload one or more PDFs.
-4. The parsed records appear in the **History** tab. Click **Details** to see the full parsed JSON in a neat layout.
-
-## Prerequisites
-- **Frontend**: Node.js 18+ and npm
-- **Backend**: Python 3.10+
-- **Optional**: Docker Desktop (for Postgres via Docker)
-- **Windows users**: If `python` not found, install from python.org and ensure “Add to PATH” is checked.
-
-## Screenshots
-Add your screenshots to `screenshots/` (included in repo to meet submission criteria).
-
-## Notes on LLM
-- By default, if `GEMINI_API_KEY` is **not** set, the backend returns reasonable rule‑based suggestions to avoid failures.
-- If `GEMINI_API_KEY` is set, the app uses LangChain + Gemini for resume review and upskilling hints.
-
-## API
-- `POST /api/parse` — multipart form:
-  - `job_description` (string, optional)
-  - `files` (one or more PDF files)
-- `GET /api/resumes` — list of stored rows (summary fields)
-- `GET /api/resumes/{id}` — full details for one row
+###  Overview  
+This project implements an **AI-powered Resume Parser and Analyzer** using **FastAPI (Python)** for the backend and **React + Vite** for the frontend.  
+It allows users to upload resumes (PDF), automatically extracts structured information, analyzes the resume using a **Gemini LLM (via LangChain)**, and suggests personalized upskilling recommendations.
 
 ---
 
-Created to match your assignment and provided UI screenshots.
+##  Project Structure
+
+ai_resume_screening_bot/
+│
+├── backend/
+│ ├── app/
+│ │ ├── main.py # FastAPI entry point
+│ │ ├── models.py # SQLAlchemy models for DB
+│ │ ├── database.py # PostgreSQL connection setup
+│ │ ├── routes/
+│ │ │ ├── resume_routes.py # API routes for upload/fetch
+│ │ ├── utils/
+│ │ │ ├── parser.py # Resume text extraction logic
+│ │ │ ├── ai_analysis.py # LLM (Gemini/LangChain) logic
+│ │ └── init.py
+│ │
+│ ├── requirements.txt # Python dependencies
+│ ├── Dockerfile # Backend Docker build file
+│ ├── .env # Environment variables (local)
+│ └── README.md
+│
+├── frontend/
+│ ├── src/
+│ │ ├── components/ # Reusable React components
+│ │ ├── pages/
+│ │ │ ├── UploadResume.jsx # Upload tab UI
+│ │ │ ├── PastResumes.jsx # Past resumes tab UI
+│ │ ├── App.jsx # Main React app
+│ │ ├── main.jsx # React entry point
+│ │ └── api.js # Frontend API integration
+│ │
+│ ├── vite.config.js # Vite configuration
+│ ├── package.json # Node dependencies
+│ ├── tailwind.config.js # Tailwind setup
+│ ├── index.html
+│ └── Dockerfile # Frontend Docker build file
+│
+├── docker-compose.yml # Docker multi-service config
+├── sample_data/ # Test resumes for demo
+├── screenshots/ # Project screenshots
+└── README.md # Main documentation
+
+---
+
+##  Features
+
+###  **Tab 1 – Upload Resume**
+- Upload PDF resumes.  
+- Backend extracts key fields:  
+  - Name, Email, Phone Number  
+  - Core & Soft Skills  
+  - Experience, Education (if available)  
+- Uses **Gemini LLM (via LangChain)** for:
+  - Resume improvement suggestions  
+  - Personalized upskilling advice  
+- Stores parsed data in **PostgreSQL**  
+- Displays structured JSON response visually on frontend.
+
+###  **Tab 2 – Past Resumes**
+- Fetches and lists all uploaded resumes from DB.  
+- Displays: File Name, Name, Email, Phone, Rating.  
+- **Details Modal** shows full analysis (skills, suggestions, etc.).
+
+---
+
+##  Tech Stack
+
+| Layer | Technology |
+|-------|-------------|
+| **Frontend** | React (Vite + Tailwind CSS) |
+| **Backend API** | FastAPI (Python) |
+| **Database** | PostgreSQL |
+| **AI/LLM Integration** | Gemini (via LangChain) |
+| **Containerization** | Docker + Docker Compose |
+| **Environment Config** | dotenv (.env file) |
+
+---
+
+##  Setup Instructions
+
+###  Option A — Local Run (Quick Setup)
+
+####  Prerequisites
+- Python ≥ 3.10  
+- Node.js ≥ 18  
+- PostgreSQL installed & running  
+- (Optional) Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+
+####  Backend Setup
+```bash
+cd backend
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+# Run FastAPI server
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+Visit http://localhost:8000/docs to test APIs.
+
+Frontend Setup
+cd frontend
+npm install
+npm run dev
+
+
+Access the frontend at http://localhost:5173
+
+ Option B — Docker Compose (Recommended for Assignment)
+ Prerequisites
+
+Install Docker Desktop and enable virtualization from BIOS.
+
+ Steps
+cd ai_resume_screening_bot
+docker compose up --build
+
+
+ Backend → http://localhost:8000
+
+ Frontend → http://localhost:5173
+
+ Database → localhost:5432 (DB: resume_db)
+
+ Environment Variables
+
+Create a .env file inside /backend with the following:
+
+DATABASE_URL=postgresql://postgres:postgres@db:5432/resume_db
+GEMINI_API_KEY=your_gemini_api_key_here
+
+
+(Without the Gemini key, fallback AI responses will be used.)
+
+ Sample API Response
+{
+  "ok": true,
+  "count": 1,
+  "items": [
+    {
+      "file_name": "Amol_Arora_Resume.pdf",
+      "name": "Amol Arora",
+      "email": "amolarora77@gmail.com",
+      "phone": "+91 9557681927",
+      "core_skills": ["Python","React","Node","Flask","MongoDB","Postgres"],
+      "resume_rating": 8,
+      "improvement_areas": "Add quantified metrics; highlight major achievements.",
+      "upskill_suggestions": "Learn FastAPI deployment, CI/CD basics, and system design."
+    }
+  ]
+}
+
+ Key Learning Outcomes
+
+Building REST APIs with FastAPI
+
+Using LangChain for LLM integration
+
+Connecting PostgreSQL with SQLAlchemy ORM
+
+Multi-container app setup via Docker Compose
+
+Managing API requests and state in React (Vite)
+
+ Assignment Compliance Checklist 
+
+ Frontend UI (Upload + History Tabs)
+
+ Backend with FastAPI & LLM Integration
+
+ PostgreSQL Database Integration
+
+ Resume Parsing & Analysis
+
+ Dockerized Setup for Deployment
+
+ AI Feedback via Gemini (or fallback)
+
+ README as per assignment guidelines
+
+ Screenshots of working app
+
+ Screenshots (add in /screenshots)
+
+Upload Tab – Before Upload
+
+Upload Tab – Parsed Resume Display
+
+Past Resumes Tab – Table View
+
+Resume Details Modal – Full Analysis
+
+ Developed By
+
+Amol Arora
+B.Tech IT (2022–2026), Jaypee University of Information Technology
+📧 amolarora77@gmail.com
+
+
+
