@@ -107,41 +107,45 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 Visit http://localhost:8000/docs to test APIs.
 
-Frontend Setup
+## Frontend Setup
+```
 cd frontend
 npm install
 npm run dev
+```
 
 
 Access the frontend at http://localhost:5173
 
- Option B — Docker Compose (Recommended for Assignment)
- Prerequisites
+## Option B — Docker Compose (Recommended for Assignment)
+* Prerequisites
 
-Install Docker Desktop and enable virtualization from BIOS.
+* Install Docker Desktop and enable virtualization from BIOS.
 
- Steps
+* Steps
+```
 cd ai_resume_screening_bot
 docker compose up --build
+```
 
+* Backend → http://localhost:8000
 
- Backend → http://localhost:8000
+* Frontend → http://localhost:5173
 
- Frontend → http://localhost:5173
+* Database → localhost:5432 (DB: resume_db)
 
- Database → localhost:5432 (DB: resume_db)
-
- Environment Variables
+## Environment Variables
 
 Create a .env file inside /backend with the following:
-
+```
 DATABASE_URL=postgresql://postgres:postgres@db:5432/resume_db
 GEMINI_API_KEY=your_gemini_api_key_here
-
+```
 
 (Without the Gemini key, fallback AI responses will be used.)
 
- Sample API Response
+ ## Sample API Response
+ ```
 {
   "ok": true,
   "count": 1,
@@ -158,7 +162,7 @@ GEMINI_API_KEY=your_gemini_api_key_here
     }
   ]
 }
-
+```
 ## Key Learning Outcomes
 
 * Building REST APIs with FastAPI
