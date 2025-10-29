@@ -189,15 +189,12 @@ Managing API requests and state in React (Vite)
 
  Screenshots of working app
 
- Screenshots (add in /screenshots)
+## Screenshots
+<img width="1355" height="638" alt="resumeai 1" src="https://github.com/user-attachments/assets/f2738fbc-cbd0-4d25-9e14-3ae9e563e631" />
+<img width="1352" height="722" alt="resumeai 2" src="https://github.com/user-attachments/assets/dcf2e519-cdf4-4c8c-97d1-c8d6070d846d" />
+<img width="1357" height="638" alt="resumeai 3" src="https://github.com/user-attachments/assets/6ca286a7-9371-4c83-a7aa-8b9217317460" />
+<img width="1363" height="557" alt="resumeai 4" src="https://github.com/user-attachments/assets/f802337d-a199-46af-bbeb-be4f86c08420" />
 
-Upload Tab – Before Upload
-
-Upload Tab – Parsed Resume Display
-
-Past Resumes Tab – Table View
-
-Resume Details Modal – Full Analysis
 
  Developed By
 
