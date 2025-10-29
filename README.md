@@ -159,35 +159,35 @@ GEMINI_API_KEY=your_gemini_api_key_here
   ]
 }
 
- Key Learning Outcomes
+## Key Learning Outcomes
 
-Building REST APIs with FastAPI
+* Building REST APIs with FastAPI
 
-Using LangChain for LLM integration
+* Using LangChain for LLM integration
 
-Connecting PostgreSQL with SQLAlchemy ORM
+* Connecting PostgreSQL with SQLAlchemy ORM
 
-Multi-container app setup via Docker Compose
+* Multi-container app setup via Docker Compose
 
-Managing API requests and state in React (Vite)
+* Managing API requests and state in React (Vite)
 
- Assignment Compliance Checklist 
+ ## Assignment Compliance Checklist 
 
- Frontend UI (Upload + History Tabs)
+* Frontend UI (Upload + History Tabs)
 
- Backend with FastAPI & LLM Integration
+* Backend with FastAPI & LLM Integration
 
- PostgreSQL Database Integration
+* PostgreSQL Database Integration
 
- Resume Parsing & Analysis
+* Resume Parsing & Analysis
 
- Dockerized Setup for Deployment
+* Dockerized Setup for Deployment
 
- AI Feedback via Gemini (or fallback)
+* AI Feedback via Gemini (or fallback)
 
- README as per assignment guidelines
+* README as per assignment guidelines
 
- Screenshots of working app
+* Screenshots of working app
 
 ## Screenshots
 <img width="1355" height="638" alt="resumeai 1" src="https://github.com/user-attachments/assets/f2738fbc-cbd0-4d25-9e14-3ae9e563e631" />
@@ -196,9 +196,9 @@ Managing API requests and state in React (Vite)
 <img width="1363" height="557" alt="resumeai 4" src="https://github.com/user-attachments/assets/f802337d-a199-46af-bbeb-be4f86c08420" />
 
 
- Developed By
+## Developed By
 
-Amol Arora
+**Amol Arora**
 B.Tech IT (2022–2026), Jaypee University of Information Technology
 📧 amolarora77@gmail.com
 
