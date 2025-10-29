@@ -8,6 +8,7 @@ It allows users to upload resumes (PDF), automatically extracts structured infor
 
 ##  Project Structure
 
+```
 ai_resume_screening_bot/
 │
 ├── backend/
@@ -47,7 +48,7 @@ ai_resume_screening_bot/
 ├── sample_data/ # Test resumes for demo
 ├── screenshots/ # Project screenshots
 └── README.md # Main documentation
-
+```
 ---
 
 ##  Features
